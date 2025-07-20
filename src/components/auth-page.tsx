@@ -2,8 +2,19 @@
 
 import { useState } from "react"
 
+import { useRouter } from 'next/navigation'
+
+
+
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"login" | "register">("register")
+  const router = useRouter()
+
+  const handleLogin = (e: React.FormEvent) => {
+  e.preventDefault()
+  // Validate logic here...
+  router.push('/profile')  // Redirect
+}
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -41,7 +52,7 @@ export default function AuthPage() {
                 <p className="text-gray-600">Create an account to get started.</p>
               </div>
 
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleLogin}>
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Name
